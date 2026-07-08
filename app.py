@@ -6,8 +6,8 @@ from urllib.parse import urlparse, parse_qs
 import api
 import database
 
-HOST = "localhost"
-PORT = 8000
+HOST = "0.0.0.0"
+PORT = int(os.environ.get("PORT", 8000))
 
 
 class StudentServer(BaseHTTPRequestHandler):
