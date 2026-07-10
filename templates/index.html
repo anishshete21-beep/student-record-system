@@ -21,7 +21,7 @@
 
         <h1>🎓 Student Record System</h1>
 
-    
+        
 
     </div>
 
@@ -34,9 +34,11 @@
         <div class="form-grid">
 
             <input
-                type="text"
+                type="number"
                 id="roll"
-                placeholder="Roll Number"
+                placeholder="Roll Number (1-100)"
+                min="1"
+                max="100"
                 required>
 
             <input
@@ -51,11 +53,18 @@
                 placeholder="Age"
                 required>
 
-            <input
-                type="text"
+            <select
                 id="course"
-                placeholder="Course"
                 required>
+
+                <option value="" disabled selected>Select Course</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Civil">Civil</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Chemical">Chemical</option>
+                <option value="Electrical">Electrical</option>
+
+            </select>
 
         </div>
 
@@ -89,11 +98,21 @@
 
         <h2>Search Student</h2>
 
-        <input
-            type="text"
-            id="search"
-            placeholder="Search by Roll Number, Name or Course"
-            onkeyup="searchStudent()">
+        <div class="search-group">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search by Roll Number, Name or Course"
+                onkeydown="if(event.key==='Enter'){searchStudent();}">
+
+            <button
+                class="primary-btn"
+                onclick="searchStudent()">
+                Search
+            </button>
+
+        </div>
 
     </div>
 
@@ -254,6 +273,15 @@ function saveStudent() {
         student.course===""){
 
         showMessage("Please fill all fields.", true);
+
+        return;
+    }
+
+    const rollNumber = Number(student.roll);
+
+    if(!Number.isInteger(rollNumber) || rollNumber < 1 || rollNumber > 100){
+
+        showMessage("Roll number must be between 1 and 100.", true);
 
         return;
     }
