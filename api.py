@@ -85,6 +85,12 @@ def add(data):
                 "message": "Please fill all fields."
             })
 
+        if not roll.isdigit() or not (1 <= int(roll) <= 100):
+            return json.dumps({
+                "success": False,
+                "message": "Roll number must be between 1 and 100."
+            })
+
         add_student(
             roll,
             name,
@@ -134,6 +140,12 @@ def update(student_id, data):
             return json.dumps({
                 "success": False,
                 "message": "Please fill all fields."
+            })
+
+        if not roll.isdigit() or not (1 <= int(roll) <= 100):
+            return json.dumps({
+                "success": False,
+                "message": "Roll number must be between 1 and 100."
             })
 
         update_student(
